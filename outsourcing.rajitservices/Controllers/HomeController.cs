@@ -18,7 +18,7 @@ namespace outsourcing.rajitservices.Controllers
     {
         public ActionResult Index()
         {
-          
+
             return View("index");
 
         }

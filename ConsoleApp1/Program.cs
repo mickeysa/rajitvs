@@ -8,51 +8,99 @@ namespace ConsoleApp1
 {
     class Program
     {
-        readonly int s = 90;
-
-        public Program()
-        {
-            Console.WriteLine(s);
-            s = 89;
-            Console.WriteLine(s);
-        }
+        
         static void Main(string[] args)
         {
-            Program p = new Program();
-            const int ss = 23;
-            
-            Base b = new Derived();                     
-            Derived d = new Derived();
 
-            b.DoIt();                       
-            d.DoIt();
+            #region Old Code
+            //Solution Sln = new Solution();       
 
-            for (int row = 8; row >= 1; --row)
-            {
-                for (int col = 1; col <= row; ++col)
-                {
-                    Console.Write("*");
-                }
+            //int[] result = Sln.TwoSum(new int[] { 2, 4, 5, 6 }, 9);
 
-                Console.WriteLine();
-            }
-            Console.ReadKey();
+
+
+
+            //A a = new A();
+            //B b = new B();
+            //C c = new C();
+
+            //a.Test(); // output --> "A::Test()"
+            //b.Test(); // output --> "B::Test()"
+            //c.Test(); // output --> "C::Test()"
+
+            //a = new B();
+            //a.Test(); // output --> "A::Test()"
+
+            //b = new C();
+            //b.Test(); // output --> "C::Test()"
+            //try
+            //{
+
+            //}
+            //finally
+            //{ }
+
+            #endregion
+
+            Console.ReadLine();
         }
-    }
-    public class Base
-    {
+
          
-        public  void DoIt()
+    }
+    public class Const_V_Readonly
+    {
+        public const int I_CONST_VALUE = 20;
+        public readonly int I_RO_VALUE;
+        public Const_V_Readonly()
         {
-            Console.WriteLine("Base Virtual");
+            I_RO_VALUE = 30;
         }
     }
 
-    public   class Derived : Base
+    public class Map
     {
-        public new void DoIt()
+        public int index { get; set; }
+        public int value { get; set; }
+    }
+    public class Solution
+    {
+        
+        public int[] TwoSum(int[] nums, int target)
         {
-            Console.WriteLine("Derived Virtual");
+
+            List<Map> tt = new List<Map>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+
+                int compliment = target - nums[i];
+
+                if (tt.Where(p => p.value == compliment).FirstOrDefault() != null)
+                {
+                    return new int[] { tt.Where(p => p.value == compliment).FirstOrDefault().index, i };
+                }
+                tt.Add(new Map { index = i, value = nums[i] });
+            }
+
+            return new int[] { 0, 0 };
+
         }
     }
+    class A
+    {
+        public  void Test() { Console.WriteLine("A::Test()"); }
+    }
+
+    class B : A
+    {
+        public new virtual void Test() { Console.WriteLine("B::Test()"); }
+    }
+
+    class C : B
+    {
+        public override void Test() { Console.WriteLine("C::Test()"); }
+    }
+
+
+
+
 }
